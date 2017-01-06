@@ -17,13 +17,14 @@
   (render [this]
           (let [{:keys [total]} (om/props this)]
             (d/div {:class "container"}
-                   (d/p
+                   (d/div {:class "container"}
                     (b/toolbar {}
                                (b/button-group {}
                                                (b/button {:onClick (fn [e] (swap! app-state update-in [:total] dec))}
                                                          (r/glyphicon {:glyph "minus"}))
                                                (b/button {:onClick (fn [e] (swap! app-state update-in [:total] inc))}
                                                          (r/glyphicon {:glyph "plus"})))))
+                   
                    (d/div {:class "container text-center"}
                           (p/panel {:header (d/h2 (str total "-kompisar"))
                                     :bs-style "primary"}
