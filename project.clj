@@ -7,11 +7,8 @@
                  [racehub/om-bootstrap "0.6.1"]
                  [figwheel-sidecar "0.5.0-SNAPSHOT" :scope "test"]]
   :cljsbuild {
-              :builds [{:id "release"
-                        :source-paths ["src"]
-                        :compiler {
-                                   :asset-path "js"
-                                   :output-to "resources/public/js/main.js"
-                                   :output-dir "resources/public/js"
-                                   :optimizations :advanced
-                                   :pretty-print false}}]})
+              :builds {:release
+                       {:source-paths ["src"]
+                        :compiler {:output-to "resources/public/js/main.js"
+                                   :optimizations :advanced 
+                                   :pretty-print false}}}})
