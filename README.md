@@ -7,6 +7,7 @@ To start development with figwheel:
 ```
 rlwrap lein run -m clojure.main script/figwheel.clj
 ```
+Direct your Chrome browser to http://localhost:3449/
 
 # Deploy
 To build and push artifacts to gh-pages:
