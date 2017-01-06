@@ -1,7 +1,10 @@
 (ns talkompisar.core
   (:require [goog.dom :as gdom]
             [om.next :as om :refer-macros [defui]]
-            [om.dom :as dom]))
+            [om-tools.dom :as d :include-macros true]
+            [om-bootstrap.button :as b]
+            [om-bootstrap.panel :as p]
+            [om-bootstrap.random :as r]))
 
 (def app-state (atom {:total 5}))
 
@@ -13,23 +16,20 @@
   Object
   (render [this]
           (let [{:keys [total]} (om/props this)]
-            (dom/div #js {:className "container"}
-                     (dom/p #js {:className "btn-toolbar"}
-                              (dom/div #js {:className "btn-group"}
-                                       (dom/button #js {:className "btn btn-default"
-                                                        :onClick (fn [e] (swap! app-state update-in [:total] dec))}
-                                                   (dom/span #js {:className "glyphicon glyphicon-minus"}))
-                                       (dom/button #js {:className "btn btn-default"
-                                                        :onClick (fn [e] (swap! app-state update-in [:total] inc))}
-                                                   (dom/span #js {:className "glyphicon glyphicon-plus"}))))
-            (dom/div #js {:className "container text-center"}
-                     (dom/div #js {:className "panel panel-primary"}
-                              (dom/div #js {:className "panel-heading"}
-                                       (dom/h2 nil (str total "-kompisar")))
-                              (dom/div #js {:className "panel-body"}
-                                       (map #(dom/h3 nil (mattetal % total)) (range (inc total))))))))))
+            (d/div {:class "container"}
+                   (d/p
+                    (b/toolbar {}
+                               (b/button-group {}
+                                               (b/button {:onClick (fn [e] (swap! app-state update-in [:total] dec))}
+                                                         (r/glyphicon {:glyph "minus"}))
+                                               (b/button {:onClick (fn [e] (swap! app-state update-in [:total] inc))}
+                                                         (r/glyphicon {:glyph "plus"})))))
+                   (d/div {:class "container text-center"}
+                          (p/panel {:header (d/h2 (str total "-kompisar"))
+                                    :bs-style "primary"}
+                                   (map #(d/h3 (mattetal % total)) (range (inc total)))))))))
 
-  (def reconciler (om/reconciler {:state app-state}))
+(def reconciler (om/reconciler {:state app-state}))
 
-  (om/add-root! reconciler Talkompisar (gdom/getElement "app"))
+(om/add-root! reconciler Talkompisar (gdom/getElement "app"))
 
