@@ -1,5 +1,5 @@
-(defproject talkompisar "0.1.0-SNAPSHOT"
-  :description "Talkompisar!"
+(defproject talkamrater "0.1.0-SNAPSHOT"
+  :description "Talkamrater!"
   :plugins [[lein-cljsbuild "1.1.5"]]
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
