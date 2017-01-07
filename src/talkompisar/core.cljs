@@ -8,29 +8,54 @@
 
 (def app-state (atom {:total 5}))
 
-(defn mattetal
-  [first total]
-  (str first " + " (- total first) " = " total))
+(defn read [{:keys [state] :as env} key params]
+  (let [st @state]
+    (if-let [[_ value] (find st key)]
+      {:value value}
+      {:value :not-found})))
 
-(defui Talkompisar
+(defn mutate [{:keys [state] :as env} key params]
+  (if (= 'increment key)
+    {:value {:keys [:total]}
+     :action #(swap! state update-in [:total] inc)}
+    (if (= 'decrement key)
+      {:value {:keys [:total]}
+       :action #(swap! state update-in [:total] dec)}
+      {:value :not-found})))
+
+(defn toolbar
+  [this]
+  (b/toolbar {}
+             (b/button-group {}
+                             (b/button {:onClick (fn [e] (om/transact! this '[(decrement)]))}
+                                       (r/glyphicon {:glyph "minus"}))
+                             (b/button {:onClick (fn [e] (om/transact! this '[(increment)]))}
+                                       (r/glyphicon {:glyph "plus"})))))
+
+(defn talkamrat
+  [first total]
+  (d/h3 (str first " + " (- total first) " = " total)))
+  
+(defn talkamrater
+  [total]
+  (p/panel {:header (d/h2 (str total "-kompisar"))
+            :bs-style "primary"}
+           (map #(talkamrat % total) (range (inc total)))))
+
+(defui RootView
+  static om/IQuery
+  (query [this]
+         [:total])
   Object
   (render [this]
           (let [{:keys [total]} (om/props this)]
             (d/div {:class "container"}
                    (d/div {:class "container"}
-                    (b/toolbar {}
-                               (b/button-group {}
-                                               (b/button {:onClick (fn [e] (swap! app-state update-in [:total] dec))}
-                                                         (r/glyphicon {:glyph "minus"}))
-                                               (b/button {:onClick (fn [e] (swap! app-state update-in [:total] inc))}
-                                                         (r/glyphicon {:glyph "plus"})))))
-                   
+                          (toolbar this))
                    (d/div {:class "container text-center"}
-                          (p/panel {:header (d/h2 (str total "-kompisar"))
-                                    :bs-style "primary"}
-                                   (map #(d/h3 (mattetal % total)) (range (inc total)))))))))
+                          (talkamrater total))))))
 
-(def reconciler (om/reconciler {:state app-state}))
+(def reconciler (om/reconciler {:state app-state :parser (om/parser {:read read :mutate mutate})}))
 
-(om/add-root! reconciler Talkompisar (gdom/getElement "app"))
+(om/add-root! reconciler RootView (gdom/getElement "app"))
 
