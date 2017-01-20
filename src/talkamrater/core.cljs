@@ -3,6 +3,7 @@
             [om.next :as om :refer-macros [defui]]
             [om-tools.dom :as d :include-macros true]
             [om-bootstrap.button :as b]
+            [om-bootstrap.nav :as n]
             [om-bootstrap.panel :as p]
             [om-bootstrap.random :as r]))
 
@@ -30,17 +31,19 @@
 
 (defn toolbar
   [this]
-  (b/toolbar {}
-             (b/button-group {}
-                             (b/button {:onClick (fn [e] (om/transact! this '[(decrement)]))}
-                                       (r/glyphicon {:glyph "circle-arrow-left"}))
-                             (b/button {:onClick (fn [e] (om/transact! this '[(increment)]))}
-                                       (r/glyphicon {:glyph "circle-arrow-right"})))))
+  (n/navbar {}
+            (n/nav {}
+                   (n/nav-item {}
+                   (b/button-group {}
+                   (b/button {:onClick (fn [e] (om/transact! this '[(decrement)]))}
+                             (r/glyphicon {:glyph "circle-arrow-left"}))
+                   (b/button {:onClick (fn [e] (om/transact! this '[(increment)]))}
+                             (r/glyphicon {:glyph "circle-arrow-right"})))))))
 
 (defn talkamrat
   [first total]
   (d/h3 (str first " + " (- total first) " = " total)))
-  
+
 (defn talkamrater
   [total]
   (p/panel {:header (d/h2 (str total ":ans talkamrater"))
