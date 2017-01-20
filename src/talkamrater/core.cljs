@@ -28,9 +28,9 @@
   (b/toolbar {}
              (b/button-group {}
                              (b/button {:onClick (fn [e] (om/transact! this '[(decrement)]))}
-                                       (r/glyphicon {:glyph "minus"}))
+                                       (r/glyphicon {:glyph "circle-arrow-left"}))
                              (b/button {:onClick (fn [e] (om/transact! this '[(increment)]))}
-                                       (r/glyphicon {:glyph "plus"})))))
+                                       (r/glyphicon {:glyph "circle-arrow-right"})))))
 
 (defn talkamrat
   [first total]
