@@ -14,13 +14,18 @@
       {:value value}
       {:value :not-found})))
 
+(defn dec-to-zero
+  "Decrease n but avoid going below zero"
+  [n]
+  (max (dec n) 0))
+
 (defn mutate [{:keys [state] :as env} key params]
   (if (= 'increment key)
     {:value {:keys [:total]}
      :action #(swap! state update-in [:total] inc)}
     (if (= 'decrement key)
       {:value {:keys [:total]}
-       :action #(swap! state update-in [:total] dec)}
+       :action #(swap! state update-in [:total] dec-to-zero)}
       {:value :not-found})))
 
 (defn toolbar
