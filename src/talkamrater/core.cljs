@@ -31,14 +31,16 @@
 
 (defn toolbar
   [this]
-  (n/navbar {}
-            (n/nav {}
-                   (n/nav-item {}
-                   (b/button-group {}
-                   (b/button {:onClick (fn [e] (om/transact! this '[(decrement)]))}
-                             (r/glyphicon {:glyph "circle-arrow-left"}))
-                   (b/button {:onClick (fn [e] (om/transact! this '[(increment)]))}
-                             (r/glyphicon {:glyph "circle-arrow-right"})))))))
+  (let [{:keys [total]} (om/props this)]
+    (n/navbar {}
+              (n/nav {}
+                     (n/nav-item {}
+                                 (b/button-group {}
+                                                 (b/button {:onClick (fn [e] (om/transact! this '[(decrement)]))
+                                                            :disabled? (not (pos? total))}
+                                                           (r/glyphicon {:glyph "circle-arrow-left"}))
+                                                 (b/button {:onClick (fn [e] (om/transact! this '[(increment)]))}
+                                                           (r/glyphicon {:glyph "circle-arrow-right"}))))))))
 
 (defn talkamrat
   [first total]
