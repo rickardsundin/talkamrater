@@ -38,7 +38,7 @@
   
 (defn talkamrater
   [total]
-  (p/panel {:header (d/h2 (str total "-kompisar"))
+  (p/panel {:header (d/h2 (str total ":ans talkamrater"))
             :bs-style "primary"}
            (map #(talkamrat % total) (range (inc total)))))
 
