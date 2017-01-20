@@ -32,6 +32,7 @@ goog.addDependency("../om_bootstrap/mixins.js", ['om_bootstrap.mixins'], ['schem
 goog.addDependency("../om_bootstrap/util.js", ['om_bootstrap.util'], ['schema.core', 'cljs.core', 'goog.object', 'om.core']);
 goog.addDependency("../om_bootstrap/types.js", ['om_bootstrap.types'], ['schema.core', 'cljs.core']);
 goog.addDependency("../om_bootstrap/panel.js", ['om_bootstrap.panel'], ['schema.core', 'om_tools.dom', 'om_tools.core', 'cljs.core', 'om_bootstrap.mixins', 'om_bootstrap.util', 'om.core', 'om_bootstrap.types']);
+goog.addDependency("../om_bootstrap/nav.js", ['om_bootstrap.nav'], ['schema.core', 'om_tools.dom', 'om_tools.core', 'cljs.core', 'om_bootstrap.util', 'om.core', 'clojure.string', 'om_bootstrap.types']);
 goog.addDependency("../om_bootstrap/button.js", ['om_bootstrap.button'], ['schema.core', 'om_tools.dom', 'om_tools.mixin', 'om_tools.core', 'cljs.core', 'om_bootstrap.mixins', 'om_bootstrap.util', 'om.core', 'om_bootstrap.types']);
 goog.addDependency("../om/next/cache.js", ['om.next.cache'], ['cljs.core']);
 goog.addDependency("../clojure/zip.js", ['clojure.zip'], ['cljs.core']);
@@ -53,5 +54,5 @@ goog.addDependency("../cognitect/transit.js", ['cognitect.transit'], ['com.cogni
 goog.addDependency("../om/transit.js", ['om.transit'], ['cljs.core', 'cognitect.transit', 'om.tempid', 'com.cognitect.transit']);
 goog.addDependency("../om/next.js", ['om.next'], ['om.next.cache', 'clojure.zip', 'om.next.impl.parser', 'goog.string', 'goog.debug.Console', 'cljs.core', 'goog.object', 'goog.log', 'om.next.protocols', 'om.tempid', 'clojure.walk', 'om.transit', 'om.util']);
 goog.addDependency("../om_bootstrap/random.js", ['om_bootstrap.random'], ['schema.core', 'om_tools.dom', 'om_tools.core', 'cljs.core', 'om_bootstrap.mixins', 'om_bootstrap.util', 'om.core', 'om_bootstrap.types']);
-goog.addDependency("../talkamrater/core.js", ['talkamrater.core'], ['goog.dom', 'om_tools.dom', 'cljs.core', 'om_bootstrap.panel', 'om_bootstrap.button', 'om.next', 'om_bootstrap.random']);
+goog.addDependency("../talkamrater/core.js", ['talkamrater.core'], ['goog.dom', 'om_tools.dom', 'cljs.core', 'om_bootstrap.panel', 'om_bootstrap.nav', 'om_bootstrap.button', 'om.next', 'om_bootstrap.random']);
 goog.addDependency("../figwheel/connect.js", ['figwheel.connect'], ['cljs.core', 'figwheel.client', 'figwheel.client.utils', 'talkamrater.core']);
